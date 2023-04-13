@@ -4,28 +4,18 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(TwoSum(new int[] {2, 7, 11, 15}, 9));
+            Console.WriteLine(IsPalindrome(121));
         }
 
-        public static int[] TwoSum(int[] nums, int target)
+        public static bool IsPalindrome(int x)
         {
-            int[] res = new int[2];
-            for(int i = 0; i < nums.Length; i++)
-            {
-                for (int j = 0; j < nums.Length; j++)
-                {
-                    if(i != j)
-                    {
-                        if(nums[i] + nums[j] == target)
-                        {
-                            res[0] = i;
-                            res[1] = j;
-                        }
-                    }
-                }
-            }
+            char[] reverse = x.ToString().ToCharArray();
+            Array.Reverse(reverse);
 
-            return res;
+            if(new string(reverse) == x.ToString())
+                return true;
+            else
+                return false;
         }
     }
 }
