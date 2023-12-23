@@ -1,22 +1,20 @@
-﻿namespace leet
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine(Search(new int[] {-1, 0, 3, 5, 9, 12}, 9));
-        }
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-        public static int Search(int[] nums, int target)
-        {
-            int result = -1;
-            for(int i = 0; i < nums.Length; i++)
-            {
-                if(nums[i] == target)
-                    result = i;
-            }
-
-            return result;
-        }
+public class Program {
+  public static void Main() {
+    for(int i = 0; i < 200; i++) {
+      Console.WriteLine(FizzBuzz(i));
     }
+  }
+
+  private static string FizzBuzz(int i) {
+    return (i % 3, i % 5) switch {
+      (0, 0) => "FizzBuzz",
+      (0, _) => "Fizz",
+      (_, 0) => "Buzz",
+      (_, _) => i.ToString()
+    };
+  }
 }
