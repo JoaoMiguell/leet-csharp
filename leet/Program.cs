@@ -9,17 +9,13 @@
 
 public class Program {
   public static void Main() {
-    Console.WriteLine(ContainsDuplicate([1, 2, 3, 1]));
+    Console.WriteLine(IsAnagram("anagram", "nagaram"));
   }
 
-  static bool ContainsDuplicate(int[] nums) {
-    List<int> copy = [];
-    foreach(int num in nums) {
-      if(copy.Contains(num)) return true;
-      else copy.Add(num);
-    }
-
-    return false;
+  static bool IsAnagram(string s, string t) {
+    char[] sc = [.. s], tc = [.. t];
+    Array.Sort(sc);
+    Array.Sort(tc);
+    return new string(sc) == new string(tc);
   }
-
 }
