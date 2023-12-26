@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public class Program {
+﻿public class Program {
   public static void Main() {
-    for(int i = 0; i < 200; i++) {
-      Console.WriteLine(FizzBuzz(i));
-    }
+    Console.WriteLine(TwoSum(new int[] { 2, 7, 11, 15 }, 9));
   }
 
-  private static string FizzBuzz(int i) {
-    return (i % 3, i % 5) switch {
-      (0, 0) => "FizzBuzz",
-      (0, _) => "Fizz",
-      (_, 0) => "Buzz",
-      (_, _) => i.ToString()
-    };
+  static int[] TwoSum(int[] nums, int target) {
+    Dictionary<int, int> res = new();
+    for(int i = 0; i < nums.Length; i++) {
+      int diff = target - nums[i];
+      if(res.ContainsKey(diff)) {
+        return new int[] { res[diff], i };
+      }
+
+      if(res.ContainsKey(nums[i]))
+        res[nums[i]] = i;
+      else
+        res.Add(nums[i], i);
+    }
+
+    return null!;
   }
 }
