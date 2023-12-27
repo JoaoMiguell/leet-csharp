@@ -9,13 +9,16 @@
 
 public class Program {
   public static void Main() {
-    Console.WriteLine(IsAnagram("anagram", "nagaram"));
+    Console.WriteLine(IsPalindrome(10));
   }
 
-  static bool IsAnagram(string s, string t) {
-    char[] sc = [.. s], tc = [.. t];
-    Array.Sort(sc);
-    Array.Sort(tc);
-    return new string(sc) == new string(tc);
+  static bool IsPalindrome(int x) {
+    int iNum = 0;
+    int cX = x;
+    while(cX > 0) {
+      iNum = (iNum*10) + (cX % 10);
+      cX /= 10;
+    }
+    return x == iNum;
   }
 }
