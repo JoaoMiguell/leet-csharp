@@ -1,18 +1,15 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(LongestCommonPrefix(["flower", "flower", "flower", "flower"]));
+    Console.WriteLine(IsValid("]"));
   }
 
-  static string LongestCommonPrefix(string[] strs) {
-    string res = "";
-
-    for(int i = 0; i < strs[0].Length; i++) {
-      for(int s = 0; s < strs.Length; s++) {
-        if(i == strs[s].Length || strs[s][i] != strs[0][i]) return res;
-      }
-      res += strs[0][i];
+  static bool IsValid(string s) {
+    Dictionary<char, char> map = new() { {'}', '{'}, {')', '('}, {']', '['} };
+    Stack<char> stack = new();
+    foreach(char c in s) {
+      if(map.ContainsKey(c) && stack.Count > 0 && map[c] == stack.Peek()) stack.Pop();
+      else stack.Push(c);
     }
-
-    return res;
+    return stack.Count == 0;
   }
 }
