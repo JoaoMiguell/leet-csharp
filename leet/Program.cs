@@ -1,20 +1,18 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(RomanToInt("LVIII"));
+    Console.WriteLine(LongestCommonPrefix(["flower", "flower", "flower", "flower"]));
   }
 
-  static int RomanToInt(string s) {
-    Dictionary<char, int> map = new() {
-      {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},
-      {'C', 100}, {'D', 500}, {'M', 1000}
-    };
-    int res = 0;
-    for(int i = 0; i < s.Length; i++) {
-      if(i + 1 < s.Length && map[s[i]] < map[s[i + 1]])
-        res -= map[s[i]];
-      else
-        res += map[s[i]];
+  static string LongestCommonPrefix(string[] strs) {
+    string res = "";
+
+    for(int i = 0; i < strs[0].Length; i++) {
+      for(int s = 0; s < strs.Length; s++) {
+        if(i == strs[s].Length || strs[s][i] != strs[0][i]) return res;
       }
+      res += strs[0][i];
+    }
+
     return res;
   }
 }
