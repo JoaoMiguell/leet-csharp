@@ -1,23 +1,31 @@
-﻿public class Program {
+﻿public class ListNode {
+  public int val;
+  public ListNode next;
+  public ListNode(int val = 0, ListNode next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+
+public class Program {
   public static void Main() {
-    Console.WriteLine(MySqrt(8));
+    Console.WriteLine(DeleteDuplicates(new ListNode(1,new ListNode(1, new ListNode(2)))));
   }
 
-  static int MySqrt(int x) {
-    int left = 0, right = x;
-    int res = 0;
-
-    while(left <= right) {
-      int mid = left + ((right - left) / 2);
-      if(Math.Pow(mid, 2) > x)
-        right = mid - 1;
-      else if(Math.Pow(mid, 2) < x) {
-        left = mid + 1;
-        res = mid;
-      }
-      else
-        return mid;
+  static ListNode DeleteDuplicates(ListNode head) {
+    HashSet<int> ints = new();
+    while(head != null) {
+      if(!ints.Contains(head.val)) ints.Add(head.val);
+      head = head.next;
     }
-    return res;
+
+    ListNode res = new();
+    ListNode ptrRes = res;
+    foreach(int i in ints) {
+      res.next = new ListNode(i);
+      res = res.next;
+    }
+
+    return ptrRes.next;
   }
 }
