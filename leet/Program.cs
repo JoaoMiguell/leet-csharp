@@ -1,19 +1,20 @@
 ﻿public class Program {
   public static void Main() {
-    int[] a = [1, 2, 3, 0, 0, 0];
-    Merge(a, 3, [2, 5, 6], 3);
-
-    for(int i = 0; i < a.Length; i++) {
-      Console.Write(a[i] + " ");
-    }
+    Console.WriteLine(NumberOfBeams(["011001", "000000", "010100", "001000"]));
   }
 
-  static void Merge(int[] nums1, int m, int[] nums2, int n) {
-    int p = 0;
-    for(int i = m; i < m+n; i++) {
-      nums1[i] = nums2[p];
-      p++;
+  static int NumberOfBeams(string[] bank) {
+    int prev = bank[0].Where(l => l != '0').Select(n => int.Parse(n.ToString())).Sum();
+    int sum = 0;
+
+    for(int i = 1; i < bank.Length; i++) {
+      int cur = bank[i].Where(l => l != '0').Select(n => int.Parse(n.ToString())).Sum();
+      if(cur > 0) {
+        sum += prev * cur;
+        prev = cur;
+      }
     }
-    Array.Sort(nums1);
+
+    return sum;
   }
 }
