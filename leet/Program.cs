@@ -1,31 +1,19 @@
 ﻿public class Program {
   public static void Main() {
-    var r = FindMatrix([1, 3, 4, 1, 2, 3, 1]);
+    int[] a = [1, 2, 3, 0, 0, 0];
+    Merge(a, 3, [2, 5, 6], 3);
 
-    foreach(var item in r) {
-      foreach(var item1 in item) {
-        Console.Write($"{item1} ");
-      }
-      Console.WriteLine();
+    for(int i = 0; i < a.Length; i++) {
+      Console.Write(a[i] + " ");
     }
   }
 
-  static IList<IList<int>> FindMatrix(int[] nums) {
-    List<int> lNums = [.. nums];
-    IList<IList<int>> res = new List<IList<int>>();
-
-    while(lNums.Count > 0) {
-      List<int> temp = [];
-      for(int j = 0; j < lNums.Count; j++) {
-        if(!temp.Contains(lNums[j])) {
-          temp.Add(lNums[j]);
-          lNums.RemoveAt(j);
-          j--;
-        }
-      }
-      res.Add(temp);
+  static void Merge(int[] nums1, int m, int[] nums2, int n) {
+    int p = 0;
+    for(int i = m; i < m+n; i++) {
+      nums1[i] = nums2[p];
+      p++;
     }
-
-    return res;
+    Array.Sort(nums1);
   }
 }
