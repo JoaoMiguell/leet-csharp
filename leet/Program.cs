@@ -1,20 +1,21 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(NumberOfBeams(["011001", "000000", "010100", "001000"]));
+    Console.WriteLine(LengthOfLongestSubstring("pwwkew"));
   }
 
-  static int NumberOfBeams(string[] bank) {
-    int prev = bank[0].Where(l => l != '0').Select(n => int.Parse(n.ToString())).Sum();
+  static int LengthOfLongestSubstring(string s) {
+    List<char> res = new();
     int sum = 0;
 
-    for(int i = 1; i < bank.Length; i++) {
-      int cur = bank[i].Where(l => l != '0').Select(n => int.Parse(n.ToString())).Sum();
-      if(cur > 0) {
-        sum += prev * cur;
-        prev = cur;
+    foreach (char c in s) {
+      if(!res.Contains(c)) res.Add(c);
+      else {
+        sum = Math.Max(sum, res.Count);
+        res.RemoveRange(0, res.IndexOf(c)+1);
+        res.Add(c);
       }
     }
 
-    return sum;
+    return Math.Max(sum, res.Count);
   }
 }
