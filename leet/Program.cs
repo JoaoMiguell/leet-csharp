@@ -1,21 +1,24 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(LengthOfLongestSubstring("pwwkew"));
+    Console.WriteLine(MinOperations([2, 3, 3, 2, 2, 4, 2, 3, 4]));
   }
 
-  static int LengthOfLongestSubstring(string s) {
-    List<char> res = new();
-    int sum = 0;
-
-    foreach (char c in s) {
-      if(!res.Contains(c)) res.Add(c);
-      else {
-        sum = Math.Max(sum, res.Count);
-        res.RemoveRange(0, res.IndexOf(c)+1);
-        res.Add(c);
-      }
+  static int MinOperations(int[] nums) {
+    Dictionary<int, int> map = new();
+    foreach(int num in nums) {
+      if(map.ContainsKey(num))
+        map[num]++;
+      else
+        map.Add(num, 1);
     }
 
-    return Math.Max(sum, res.Count);
+    int res = 0;
+    foreach(var item in map) {
+      if(item.Value == 1)
+        return -1;
+      res += (int)Math.Ceiling((double)item.Key / 3);
+    }
+
+    return res;
   }
 }
