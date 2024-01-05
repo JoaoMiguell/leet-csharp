@@ -1,24 +1,18 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(MinOperations([2, 3, 3, 2, 2, 4, 2, 3, 4]));
+    Console.WriteLine(LengthOfLIS([0, 1, 0, 3, 2, 3]));
   }
 
-  static int MinOperations(int[] nums) {
-    Dictionary<int, int> map = new();
-    foreach(int num in nums) {
-      if(map.ContainsKey(num))
-        map[num]++;
-      else
-        map.Add(num, 1);
+  static int LengthOfLIS(int[] nums) {
+    int[] ints = new int[nums.Length];
+    Array.Fill(ints, 1);
+
+    for(int i = nums.Length - 1;  i >= 0; i--) {
+      for(int j = i+1; j < nums.Length; j++) {
+        if(nums[i] < nums[j]) ints[i] = Math.Max(ints[i], 1 + ints[j]);
+      }
     }
 
-    int res = 0;
-    foreach(var item in map) {
-      if(item.Value == 1)
-        return -1;
-      res += (int)Math.Ceiling((double)item.Key / 3);
-    }
-
-    return res;
+    return ints.Max();
   }
 }
