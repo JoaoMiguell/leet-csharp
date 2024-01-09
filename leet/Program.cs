@@ -1,18 +1,16 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(MergeAlternately("abc", "pqr"));
+    Console.WriteLine(GcdOfStrings("ABCABC", "ABC"));
   }
 
-  static string MergeAlternately(string word1, string word2) {
-    int i = 0, j = 0;
-    string res = "";
-
-    while(i < word1.Length || j < word2.Length) {
-      res = i < word1.Length ? res + word1[i] : res;
-      res = j < word2.Length ? res + word2[j] : res;
-      i++; j++;
+  static string GcdOfStrings(string str1, string str2) {
+    int a = str1.Length, b = str2.Length;
+    if(!(str1 + str2).Equals(str2 + str1)) return "";
+    while(b != 0) {
+      int temp = a % b;
+      a = b;
+      b = temp;
     }
-
-    return res;
+    return str1[..a];
   }
 }
