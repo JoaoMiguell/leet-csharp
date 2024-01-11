@@ -1,19 +1,17 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(CanPlaceFlowers([0, 0, 1, 0, 0], 1));
+    Console.WriteLine(ReverseVowels("hello"));
   }
 
-  static bool CanPlaceFlowers(int[] flowerbed, int n) {
-    int[] temp = [0, ..flowerbed, 0];
-    int res = 0;
+  static string ReverseVowels(string s) {
+    string res = "", comp = "aeiouAEIOU";
+    Stack<char> stack = new(s.Where(x => comp.Contains(x)));
 
-    for(int i = 1; i < temp.Length-1; i++) {
-      if(temp[i-1] == 0 && temp[i] == 0 && temp[i+1] == 0) {
-        temp[i] = 1;
-        res++;
-      }
+    foreach(char c in s) {
+      if(comp.Contains(c)) res += stack.Pop();
+      else res += c;
     }
 
-    return res >= n;
+    return res;
   }
 }
