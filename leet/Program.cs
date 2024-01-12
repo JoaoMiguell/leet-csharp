@@ -1,20 +1,18 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(string.Join(",", ProductExceptSelf([1, 2, 3, 4])));
+    Console.WriteLine(IncreasingTriplet([5, 4, 3, 2, 1]));
   }
 
-  static int[] ProductExceptSelf(int[] nums) {
-    List<int> res = [];
-    int carry = 1;
+  static bool IncreasingTriplet(int[] nums) {
+    int val1 = int.MaxValue, val2 = int.MaxValue;
     for(int i = 0; i < nums.Length; i++) {
-      res.Add(carry);
-      carry *= nums[i];
+      if(nums[i] <= val1)
+        val1 = nums[i];
+      else if(nums[i] <= val2)
+        val2 = nums[i];
+      else
+        return true;
     }
-    carry = 1;
-    for(int i = nums.Length - 1; i >= 0; i--) {
-      res[i] *= carry;
-      carry *= nums[i];
-    }
-    return [.. res];
+    return false;
   }
 }
