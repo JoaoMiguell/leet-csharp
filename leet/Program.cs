@@ -1,24 +1,21 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(Compress(['a', 'a', 'a', 'b', 'b', 'a', 'a']));
+    int[] a = [0, 0, 1];
+    MoveZeroes(a);
+    Console.WriteLine(string.Join(",", a));
   }
 
-  static int Compress(char[] chars) {
-    int i = 0, res = 0;
-    while(i < chars.Length) {
-      int sameLength = 1;
-      while(i + sameLength < chars.Length && chars[i + sameLength] == chars[i])
-        sameLength++;
-
-      chars[res++] = chars[i];
-      if(sameLength > 1) {
-        foreach(var c in sameLength.ToString())
-          chars[res++] = c;
+  static void MoveZeroes(int[] nums) {
+    int gap = 0;
+    for(int i = 0; i < nums.Length - gap; i++) {
+      if(nums[i] == 0) {
+        for(int j = i; j < nums.Length-1; j++) {
+          nums[j] = nums[j + 1];
+          nums[j + 1] = 0;
+        }
+        i--;
+        gap++;
       }
-
-      i += sameLength;
     }
-
-    return res;
   }
 }
