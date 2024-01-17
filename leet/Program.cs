@@ -1,21 +1,16 @@
 ﻿public class Program {
   public static void Main() {
-    int[] a = [0, 0, 1];
-    MoveZeroes(a);
-    Console.WriteLine(string.Join(",", a));
+    Console.WriteLine(MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
   }
 
-  static void MoveZeroes(int[] nums) {
-    int gap = 0;
-    for(int i = 0; i < nums.Length - gap; i++) {
-      if(nums[i] == 0) {
-        for(int j = i; j < nums.Length-1; j++) {
-          nums[j] = nums[j + 1];
-          nums[j + 1] = 0;
-        }
-        i--;
-        gap++;
-      }
+  static int MaxArea(int[] height) {
+    int res = 0, l = 0, r = height.Length - 1;
+    while(l < r) {
+      int area = (r-l) * Math.Min(height[l], height[r]);
+      res = Math.Max(res, area);
+      if(height[l] < height[r]) l++;
+      else r--;
     }
+    return res;
   }
 }
