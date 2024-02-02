@@ -1,15 +1,17 @@
 ﻿public class Program {
   public static void Main() {
-    Console.WriteLine(MaxVowels("abciiidef", 3));
+    Console.WriteLine(DivideArray([1, 3, 4, 8, 7, 9, 3, 5, 1], 2));
   }
 
-  static int MaxVowels(string s, int k) {
-    int max = s[..k].Count("aeiou".Contains);
-    int helper = max;
-    for(int i = k; i < s.Length; i++) {
-      helper += ("aeiou".Contains(s[i])?1:0) - ("aeiou".Contains(s[i - k]) ? 1 : 0);
-      max = Math.Max(max, helper);
+  static int[][] DivideArray(int[] nums, int k) {
+    Array.Sort(nums);
+    List<int[]> res = [];
+
+    for(int i = 0; i < nums.Length; i += 3) {
+      if(nums[i + 2] - nums[i] > k) return [];
+      res.Add(nums[i..(i + 3)]);
     }
-    return max;
+
+    return [.. res];
   }
 }
